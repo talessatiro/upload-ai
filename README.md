@@ -4,9 +4,9 @@ This project was created following the Rocketseat NLW (Number 13). The mainly pu
 
 ## Tools
 
-[React](https://react.dev/)
-[Vite](https://vitejs.dev/)
-[shadcn/ui](https://ui.shadcn.com/)
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [shadcn/ui](https://ui.shadcn.com/)
 
 ## Execution
 
