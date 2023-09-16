@@ -8,6 +8,8 @@ This project was created following the [Rocketseat](https://www.rocketseat.com.b
 - [Vite](https://vitejs.dev/)
 - [shadcn/ui](https://ui.shadcn.com/)
 - [ffmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm)
+- [NestJS](https://nestjs.com/)
+- [Prisma](https://www.prisma.io/)
 
 ## Execution
 
