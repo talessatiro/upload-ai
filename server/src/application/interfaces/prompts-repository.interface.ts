@@ -4,4 +4,4 @@ export interface IPromptsRepository {
     findMany(): Promise<Array<PromptEntity>>;
 }
 
-export const IPromptsRepository = Symbol('IPromptRepository');
+export const IPromptsRepository = Symbol('IPromptsRepository');
