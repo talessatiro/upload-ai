@@ -1,15 +1,20 @@
+import { Inject, Injectable } from '@nestjs/common';
 import { PromptEntity } from '../entities/prompt.entity';
-import { IPromptRepository } from '../interfaces/prompt-repository.interface';
+import { IPromptsRepository } from '../interfaces/prompts-repository.interface';
 
 interface ListPromptsResponse {
     prompts: Array<PromptEntity>;
 }
 
+@Injectable()
 export class ListPromptsUserCase {
-    constructor(private readonly promptRepository: IPromptRepository) {}
+    constructor(
+        @Inject(IPromptsRepository)
+        private readonly promptsRepository: IPromptsRepository,
+    ) {}
 
     async execute(): Promise<ListPromptsResponse> {
-        const prompts = await this.promptRepository.findMany();
+        const prompts = await this.promptsRepository.findMany();
 
         return {
             prompts,

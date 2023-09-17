@@ -1,5 +1,7 @@
 import { PromptEntity } from '../entities/prompt.entity';
 
-export interface IPromptRepository {
+export interface IPromptsRepository {
     findMany(): Promise<Array<PromptEntity>>;
 }
+
+export const IPromptsRepository = Symbol('IPromptRepository');

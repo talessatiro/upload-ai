@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { HTTPModule } from './http/http.module';
 
-@Module({})
+@Module({
+    imports: [HTTPModule],
+})
 export class InfraModule {}
