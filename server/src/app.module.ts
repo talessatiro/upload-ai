@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { HTTPModule } from './infra/http/http.module';
+import { InfraModule } from './infra/infra.module';
 
 @Module({
-    imports: [HTTPModule],
+    imports: [InfraModule],
     controllers: [],
     providers: [],
 })
