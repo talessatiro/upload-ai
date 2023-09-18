@@ -1,4 +1,4 @@
-import { BaseEntity } from './base.entity';
+import { BaseEntity, BaseEntityProps } from './base.entity';
 
 interface PromptEntityProps {
     title: string;
@@ -8,11 +8,11 @@ interface PromptEntityProps {
 export class PromptEntity extends BaseEntity {
     private props: PromptEntityProps;
 
-    constructor({ title, template }: PromptEntityProps, id?: string) {
-        super(id);
+    constructor(props: PromptEntityProps, baseProps?: BaseEntityProps) {
+        super(baseProps);
 
-        this.props.title = title;
-        this.props.template = template;
+        this.props.title = props.title;
+        this.props.template = props.template;
     }
 
     public get title(): string {

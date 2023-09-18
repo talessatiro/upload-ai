@@ -1,23 +1,29 @@
 import { randomUUID } from 'crypto';
 
-export class BaseEntity {
-    private _id: string;
-    private _createdAt?: Date;
-    private _updatedAt?: Date;
+export interface BaseEntityProps {
+    id: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
 
-    constructor(id: string = randomUUID()) {
-        this._id = id;
+export class BaseEntity {
+    private baseProps: BaseEntityProps;
+
+    constructor(baseProps: BaseEntityProps = { id: randomUUID() }) {
+        this.baseProps.id = baseProps.id;
+        this.baseProps.createdAt = baseProps.createdAt;
+        this.baseProps.updatedAt = baseProps.updatedAt;
     }
 
     public get id(): string {
-        return this._id;
+        return this.baseProps.id;
     }
 
     public get createdAt(): Date | undefined {
-        return this._createdAt;
+        return this.baseProps.createdAt;
     }
 
     public get updatedAt(): Date | undefined {
-        return this._updatedAt;
+        return this.baseProps.updatedAt;
     }
 }
