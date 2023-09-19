@@ -2,13 +2,13 @@ import { Prompt as RawPrompt } from '@prisma/client';
 import { PromptEntity } from 'src/application/entities/prompt.entity';
 
 export class PrismaPromptViewModel {
-    static toPrisma(entity: PromptEntity): RawPrompt {
+    static toPrisma(
+        entity: PromptEntity,
+    ): Omit<RawPrompt, 'createdAt' | 'updatedAt'> {
         return {
             id: entity.id,
             title: entity.title,
             template: entity.template,
-            createdAt: entity.createdAt,
-            updatedAt: entity.updatedAt,
         };
     }
 
