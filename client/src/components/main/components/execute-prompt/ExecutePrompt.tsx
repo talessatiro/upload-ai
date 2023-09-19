@@ -58,9 +58,6 @@ export const ExecutePrompt = ({ onPromptChange }: ExecutePromptProps) => {
                         })}
                     </SelectContent>
                 </Select>
-                <span className="block text-xs text-muted-foreground italic">
-                    You will be able to customize this option soon
-                </span>
             </div>
 
             <div className="space-y-2">
