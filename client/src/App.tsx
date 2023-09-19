@@ -1,7 +1,7 @@
-import { PageLayout } from "@/pages/layouts/PageLayout";
+import { PageLayout } from '@/pages/layouts/PageLayout';
 
 const App = () => {
-  return <PageLayout />;
+    return <PageLayout />;
 };
 
 export default App;
