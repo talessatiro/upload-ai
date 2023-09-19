@@ -1,18 +1,27 @@
 import { Textarea } from '@/components/ui/textarea';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 type PromptInputsProps = {
     defaultPromptValue?: string;
 };
 
 export const PromptInputs = ({ defaultPromptValue }: PromptInputsProps) => {
+    const [promptValue, setPromptValue] = useState<string>('');
+
+    useEffect(() => {
+        if (defaultPromptValue) {
+            setPromptValue(defaultPromptValue);
+        }
+    }, [defaultPromptValue]);
+
     return (
         <React.Fragment>
             <div className="grid grid-rows-2 gap-4 flex-1">
                 <Textarea
                     placeholder="Type the AI Prompt..."
                     className="resize-none p-4 leading-relaxed"
-                    defaultValue={defaultPromptValue}
+                    value={promptValue}
+                    onChange={(e) => setPromptValue(e.target.value)}
                 />
                 <Textarea
                     placeholder="Generated AI Result..."
