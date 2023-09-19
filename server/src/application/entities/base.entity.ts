@@ -10,9 +10,7 @@ export class BaseEntity {
     private baseProps: BaseEntityProps;
 
     constructor(baseProps: BaseEntityProps = { id: randomUUID() }) {
-        this.baseProps.id = baseProps.id;
-        this.baseProps.createdAt = baseProps.createdAt;
-        this.baseProps.updatedAt = baseProps.updatedAt;
+        this.baseProps = baseProps;
     }
 
     public get id(): string {

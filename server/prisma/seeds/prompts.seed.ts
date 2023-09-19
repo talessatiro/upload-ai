@@ -2,12 +2,14 @@ import { PrismaClient } from '@prisma/client';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const execute = async (prisma: PrismaClient) => {
-    await prisma.prompt.deleteMany();
+    const promptsCount = await prisma.prompt.count();
 
-    await prisma.prompt.create({
-        data: {
-            title: 'Título YouTube',
-            template: `Seu papel é gerar três títulos para um vídeo do YouTube.
+    if (!promptsCount) {
+        await prisma.prompt.create({
+            data: {
+                title: 'Título YouTube',
+                template:
+                    `Seu papel é gerar três títulos para um vídeo do YouTube.
 
 Abaixo você receberá uma transcrição desse vídeo, use essa transcrição para gerar os títulos.
 Abaixo você também receberá uma lista de títulos, use essa lista como referência para os títulos a serem gerados.
@@ -26,14 +28,14 @@ Transcrição:
 '''
 {transcription}
 '''`.trim(),
-        },
-    });
+            },
+        });
 
-    await prisma.prompt.create({
-        data: {
-            title: 'Descrição YouTube',
-            template:
-                `Seu papel é gerar uma descrição sucinta para um vídeo do YouTube.
+        await prisma.prompt.create({
+            data: {
+                title: 'Descrição YouTube',
+                template:
+                    `Seu papel é gerar uma descrição sucinta para um vídeo do YouTube.
   
 Abaixo você receberá uma transcrição desse vídeo, use essa transcrição para gerar a descrição.
 
@@ -54,8 +56,9 @@ Transcrição:
 '''
 {transcription}
 '''`.trim(),
-        },
-    });
+            },
+        });
+    }
 };
 
 export default execute;
