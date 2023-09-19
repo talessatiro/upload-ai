@@ -10,28 +10,52 @@ import {
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { Slider } from '@/components/ui/slider';
+import { PromptsAPI } from '@/api/prompts.api';
+import { Prompt } from '@/models/prompt.model';
+import { useEffect, useState } from 'react';
 
 type ExecutePromptProps = {
-    onPromptChange?: (promptId: string) => void;
+    onPromptChange?: (promptTemplate: string) => void;
 };
 
 export const ExecutePrompt = ({ onPromptChange }: ExecutePromptProps) => {
+    const { promptsAPI } = PromptsAPI();
+    const [prompts, setPrompts] = useState<Array<Prompt>>([]);
+
+    const handlePromptChange = (promptId: string) => {
+        const selectedPrompt = prompts.find((prompt) => prompt.id === promptId);
+
+        if (selectedPrompt) {
+            onPromptChange?.(selectedPrompt.template);
+        }
+    };
+
+    const fetchPrompts = async () => {
+        const prompts = await promptsAPI.findMany();
+        setPrompts(prompts);
+    };
+
+    useEffect(() => {
+        fetchPrompts();
+    }, []);
+
     return (
         <form className="space-y-3">
             <div className="space-y-2">
                 <Label htmlFor="model">Prompt Template</Label>
-                <Select onValueChange={onPromptChange}>
+                <Select onValueChange={handlePromptChange}>
                     <SelectTrigger>
                         <SelectValue placeholder="Select a prompt template" />
                     </SelectTrigger>
 
                     <SelectContent>
-                        <SelectItem value="title">
-                            Video Title (Pt-br)
-                        </SelectItem>
-                        <SelectItem value="description">
-                            Video Description (Pt-br)
-                        </SelectItem>
+                        {prompts.map((prompt) => {
+                            return (
+                                <SelectItem key={prompt.id} value={prompt.id}>
+                                    {prompt.title}
+                                </SelectItem>
+                            );
+                        })}
                     </SelectContent>
                 </Select>
                 <span className="block text-xs text-muted-foreground italic">

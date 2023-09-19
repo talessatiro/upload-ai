@@ -12,7 +12,7 @@ export const PromptInputs = ({ defaultPromptValue }: PromptInputsProps) => {
                 <Textarea
                     placeholder="Type the AI Prompt..."
                     className="resize-none p-4 leading-relaxed"
-                    value={defaultPromptValue}
+                    defaultValue={defaultPromptValue}
                 />
                 <Textarea
                     placeholder="Generated AI Result..."
