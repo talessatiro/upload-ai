@@ -5,13 +5,11 @@ import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import { ChangeEvent, MouseEvent, useMemo, useState } from 'react';
 import React from 'react';
+import { useProcessMediaContext } from '../../context/hook/useProcessMediaContext';
 
-type SelectVideoProps = {
-    onTranscribedVideo?: (mediaId: string) => void;
-};
-
-export const SelectVideo = ({ onTranscribedVideo }: SelectVideoProps) => {
+export const SelectVideo = () => {
     const [videoFile, setVideoFile] = useState<File | undefined>();
+    const { setMediaId } = useProcessMediaContext();
 
     const handleSelectVideo = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -30,7 +28,8 @@ export const SelectVideo = ({ onTranscribedVideo }: SelectVideoProps) => {
     const handleVideoTranscription = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
 
-        onTranscribedVideo?.('TODO - Set created Audio ID as argument');
+        const fakeMediaId = 'TODO - Set created Audio ID as argument';
+        setMediaId(fakeMediaId);
     };
 
     return (

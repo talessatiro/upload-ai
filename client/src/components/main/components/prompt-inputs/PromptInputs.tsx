@@ -1,18 +1,9 @@
 import { Textarea } from '@/components/ui/textarea';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useProcessMediaContext } from '../../context/hook/useProcessMediaContext';
 
-type PromptInputsProps = {
-    defaultPromptValue?: string;
-};
-
-export const PromptInputs = ({ defaultPromptValue }: PromptInputsProps) => {
-    const [promptValue, setPromptValue] = useState<string>('');
-
-    useEffect(() => {
-        if (defaultPromptValue) {
-            setPromptValue(defaultPromptValue);
-        }
-    }, [defaultPromptValue]);
+export const PromptInputs = () => {
+    const { promptText, setPromptText } = useProcessMediaContext();
 
     return (
         <React.Fragment>
@@ -20,8 +11,8 @@ export const PromptInputs = ({ defaultPromptValue }: PromptInputsProps) => {
                 <Textarea
                     placeholder="Type the AI Prompt..."
                     className="resize-none p-4 leading-relaxed"
-                    value={promptValue}
-                    onChange={(e) => setPromptValue(e.target.value)}
+                    value={promptText}
+                    onChange={(e) => setPromptText(e.target.value)}
                 />
                 <Textarea
                     placeholder="Generated AI Result..."

@@ -13,20 +13,18 @@ import { Slider } from '@/components/ui/slider';
 import { PromptsAPI } from '@/api/prompts.api';
 import { Prompt } from '@/models/prompt.model';
 import { useEffect, useState } from 'react';
+import { useProcessMediaContext } from '../../context/hook/useProcessMediaContext';
 
-type ExecutePromptProps = {
-    onPromptChange?: (promptTemplate: string) => void;
-};
-
-export const ExecutePrompt = ({ onPromptChange }: ExecutePromptProps) => {
+export const ExecutePrompt = () => {
     const { promptsAPI } = PromptsAPI();
     const [prompts, setPrompts] = useState<Array<Prompt>>([]);
+    const { mediaId, promptText, setPromptText } = useProcessMediaContext();
 
     const handlePromptChange = (promptId: string) => {
         const selectedPrompt = prompts.find((prompt) => prompt.id === promptId);
 
         if (selectedPrompt) {
-            onPromptChange?.(selectedPrompt.template);
+            setPromptText(selectedPrompt.template);
         }
     };
 
@@ -91,7 +89,11 @@ export const ExecutePrompt = ({ onPromptChange }: ExecutePromptProps) => {
 
             <Separator />
 
-            <Button type="submit" className="w-full">
+            <Button
+                type="submit"
+                className="w-full"
+                disabled={!mediaId || !promptText}
+            >
                 Execute <Wand2 className="w-4 h-4 ml-2" />
             </Button>
         </form>
