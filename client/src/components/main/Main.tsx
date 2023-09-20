@@ -7,6 +7,10 @@ import { useState } from 'react';
 export const Main = () => {
     const [defaultPromptValue, setDefaultPromptValue] = useState<string>('');
 
+    const handleTranscribedVideo = (mediaId: string) => {
+        console.log(mediaId);
+    };
+
     const handlePromptChange = (promptTemplate: string) => {
         setDefaultPromptValue(promptTemplate);
     };
@@ -18,7 +22,7 @@ export const Main = () => {
             </div>
 
             <aside className="sidebar-area w-80 space-y-6">
-                <SelectVideo />
+                <SelectVideo onTranscribedVideo={handleTranscribedVideo} />
 
                 <Separator />
 
