@@ -3,7 +3,7 @@ import { IAudiosStorageRepository } from 'src/application/interfaces/audios-stor
 import { MinioService } from '../service/minio.service';
 import { ConfigService } from '@nestjs/config';
 
-export class MinioAudioRepository implements IAudiosStorageRepository {
+export class MinioAudiosRepository implements IAudiosStorageRepository {
     constructor(
         private readonly config: ConfigService,
         private readonly minio: MinioService,
