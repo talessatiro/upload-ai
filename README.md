@@ -18,7 +18,7 @@ NOTE: The project uses the OpenAI API to generate the video transcription and pr
 
 ## Pre-Execution
 
-Execute the following command to run the required tools:
+Execute the following command on **root** folder to execute the required tools:
 
 ```sh
 docker compose up -d
@@ -38,8 +38,9 @@ yarn dev
 
 ### Back-end
 
-Go to **server** folder and execute the command:
+Go to **server** folder and execute the following commands:
 
 ```sh
+yarn prisma migrate dev
 yarn start:dev
 ```
