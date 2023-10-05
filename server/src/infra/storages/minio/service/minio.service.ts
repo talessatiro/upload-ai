@@ -12,7 +12,7 @@ export class MinioService implements OnModuleInit {
         this._client = new MinioClient({
             endPoint: this.config.get<string>('STORAGE_ENDPOINT', '127.0.0.1'),
             port: this.config.get<number>('STORAGE_PORT', 9000),
-            useSSL: false,
+            useSSL: this.config.get<boolean>('STORAGE_SSL', false),
             accessKey: this.config.get<string>('STORAGE_USER', 'user'),
             secretKey: this.config.get<string>('STORAGE_PASSWORD', 'password'),
         });

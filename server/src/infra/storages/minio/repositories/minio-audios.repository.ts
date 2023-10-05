@@ -10,17 +10,27 @@ export class MinioAudiosRepository implements IAudiosStorageRepository {
     ) {}
 
     async upload(audio: AudioEntity & { buffer: Buffer }): Promise<string> {
-        const storagePath = `${new Date().getTime()}/${audio.filename}`;
+        const fileStoragePath = `${new Date().getTime()}/${audio.filename}`;
 
         await this.minio.client.putObject(
             this.config.get<string>('STORAGE_BUCKET_NAME', 'audios'),
-            storagePath,
+            fileStoragePath,
             audio.buffer,
         );
 
-        return `http://${this.config.get<string>(
+        return this.buildFilePath(fileStoragePath);
+    }
+
+    private buildFilePath(fileStoragePath: string): string {
+        const storageEndpoint = this.config.get<string>(
             'STORAGE_ENDPOINT',
             '127.0.0.1',
-        )}:${this.config.get<number>('STORAGE_PORT', 9000)}/${storagePath}`;
+        );
+        const storagePort = this.config.get<number>('STORAGE_PORT', 9000);
+        const storageSSL = this.config.get<boolean>('STORAGE_SSL', false);
+
+        return `${
+            storageSSL ? 'https' : 'http'
+        }://${storageEndpoint}:${storagePort}/${fileStoragePath}`;
     }
 }
